@@ -1,0 +1,55 @@
+{% extends "base_2.html" %}
+{% load widget_tweaks %}
+
+{% block title %}アカウント作成 | {{ block.super }}{% endblock %}
+{% block description %}アカウント作成ページです。{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <main class="col-md-8">
+      <h1 class="mb-4">アカウント作成</h1>
+      <div class="comment_login">
+        <form action="{% url 'blog:signup' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group row">
+            <label for="{{ form.username.id_for_label }}" class="col-sm-3 col-form-label">ユーザ名</label>
+            <div class="col-sm-9">
+                {{ form.username|add_class:'form-control' }}
+                {% for error in form.username.errors %}
+                <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="{{ form.enter_password.id_for_label }}" class="col-sm-3 col-form-label">パスワード</label>
+            <div class="col-sm-9">
+                {{ form.enter_password|add_class:'form-control' }}
+                {% for error in form.enter_password.errors %}
+                <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="{{ form.retype_password.id_for_label }}" class="col-sm-3 col-form-label">もう一度入力</label>
+            <div class="col-sm-9">
+                {{ form.retype_password|add_class:'form-control' }}
+                {% for error in form.retype_password.errors %}
+                <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        <br><br>
+        <input type="submit" value="Sign Up">
+        </form><br>
+        <a href= "{% url 'blog:login' %}">戻る</a>
+      </div>
+    </main>
+    <aside class="col-md-4">
+      
+    </aside>
+  </div>
+</div>
+{% endblock %}

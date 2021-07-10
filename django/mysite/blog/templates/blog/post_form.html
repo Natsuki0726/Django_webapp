@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}新規投稿 | {{ block.super }}{% endblock %}
+{% block description %}新規投稿ページです。{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <main class="col-md-8">
+            <h1 class="mb-4">新規投稿</h1>
+            {% include "blog/snippets/pagination.html" %}
+            {% include "blog/snippets/pagination_b.html" %}
+            
+            <form class="newpost" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="{{ form.title.id_for_label }}" class="col-sm-3 col-form-label">タイトル</label>
+                    <div class="col-sm-9">
+                        {{ form.title|add_class:'form-control' }}
+                        {% for error in form.title.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <br><div class="form-group row">
+                    <label for="{{ form.singer.id_for_label }}" class="col-sm-3 col-form-label">歌手名</label>
+                    <div class="col-sm-9">
+                        {{ form.singer|add_class:'form-control' }}
+                        {% for error in form.singer.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <label for="{{ form.category.id_for_label }}" class="col-sm-3 col-form-label">カテゴリ</label>
+                    <div class="col-sm-9">
+                        {{ form.category|add_class:'form-control' }}
+                        {% for error in form.category.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <label for="{{ form.tags.id_for_label }}" class="col-sm-3 col-form-label">タグ</label>
+                    <div class="col-sm-9">
+                        {{ form.tags|add_class:'form-control' }}
+                        {% for error in form.tags.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <label for="{{ form.description.id_for_label }}" class="col-sm-3 col-form-label">詳細</label>
+                    <div class="col-sm-9">
+                        {{ form.description|add_class:'form-control' }}
+                        {% for error in form.description.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <label for="{{ form.url.id_for_label }}" class="col-sm-3 col-form-label">URL</label>
+                    <div class="col-sm-9">
+                        {{ form.url|add_class:'form-control' }}
+                        {% for error in form.url.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <label for="{{ form.image.id_for_label }}" class="col-sm-3 col-form-label">写真</label>
+                    <div class="col-sm-9">
+                        {{ form.image|add_class:'form-control' }}
+                        {% for error in form.image.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <label for="{{ form.is_public.id_for_label }}" class="col-sm-3 col-form-label">公開</label>
+                    <div class="col-sm-9">
+                        {{ form.is_public|add_class:'form-control' }}
+                        {% for error in form.is_public.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <br><br>
+                <div class="form-group row">
+                    <div class="col-sm">
+                        <button type="submit" class="btn btn-info btn-block">投稿</button>
+                    </div>
+                </div><br>
+            </form>
+            <p>{{ message }}</p>
+        </main>
+        <aside class="col-md-4">
+            {% include "blog/snippets/sidebar.html" %}
+        </aside>
+    </div>
+</div>
+{% endblock %}

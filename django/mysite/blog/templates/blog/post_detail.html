@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}{{ object.title }} | {{ block.super }}{% endblock %}
+{% block description %}{{ object.description }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <main class="col-md-8">
+      <article class="blog-area">
+        {% if object.image %}
+        <img class="card-img-top" src="{{ object.image.url }}" alt="{{ object.title }}">
+        {% endif %}
+        <hr><br>
+        <h1 class="detail_title">タイトル : {{ object.title }}</h1>
+        <br>
+        <h1 class="detail_title">歌手名 : {{ object.singer }}</h2>
+        <br><br><br>
+        <div style="font-size: 20px;">
+        <a href="{% url 'blog:category_post' object.category.slug %}"><p>カテゴリ 　: 　{{ object.category.name }}</p></a>
+        {% for tag in object.tags.all %}
+        <a href="{% url 'blog:tag_post' tag.slug %}">#{{ tag.name }}</a>　
+        {% endfor %}
+        <br><br><br>
+        <u><a>投稿者のコメント</a></u>
+        <br><br>
+        <a>　　{{ object.description|safe }}</a>
+        </div>
+        <br><br>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="{{ object.url|safe }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <hr>
+        <p class="good"><a href="{% url 'blog:like' post.pk %}"><span id="like">{{ post.like }}</span>&nbsp;&nbsp;いいね！</a></p>
+        <p>投稿日 : {{ object.published_at|date }}</p>
+      </article>
+      <article class="comment-area">
+        <a class="btn btn-primary my-3" href="{% url 'blog:comment_form' post.pk %}">コメントを投稿する</a>
+        {% include "blog/snippets/comments.html" %}
+      </article>
+    </main>
+    <div class="col-md-4">
+      {% include "blog/snippets/sidebar.html" %}
+    </div>
+  </div>
+</div>
+{% endblock %}

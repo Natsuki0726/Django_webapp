@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}お問い合わせフォーム | {{ block.super }}{% endblock %}
+{% block description %}お問い合わせフォームのページです。{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <main class="col-md-8">
+      <h1 class="mb-4">お問い合わせ</h1>
+      <div class="contact">
+        <form method="POST">{% csrf_token %}
+          <div class="form-group row">
+            <div class="col-sm-9">
+                {{ form.name|add_class:'form-control' }}
+                {% for error in form.name.errors %}
+                <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <div class="col-sm-9">
+                {{ form.email|add_class:'form-control' }}
+                {% for error in form.email.errors %}
+                <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <div class="col-sm-9">
+                {{ form.message|add_class:'form-control' }}
+                {% for error in form.message.errors %}
+                <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">送信</button>
+        </form>
+      </div>
+    </main>
+    <aside class="col-md-4">
+      {% include "blog/snippets/sidebar.html" %}
+    </aside>
+  </div>
+</div>
+{% endblock %}

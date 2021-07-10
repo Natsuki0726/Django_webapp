@@ -1,0 +1,45 @@
+{% extends "base_2.html" %}
+{% load widget_tweaks %}
+
+{% block title %}ログイン | {{ block.super }}{% endblock %}
+{% block description %}ログインページです。{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <main class="col-md-8">
+      <h1 class="mb-4">ログイン</h1>
+      <div class="comment_login">
+        <form action="{% url 'blog:login' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group row">
+            <label for="{{ form.username.id_for_label }}" class="col-sm-3 col-form-label">ユーザ名</label>
+            <div class="col-sm-9">
+                {{ form.username|add_class:'form-control' }}
+                {% for error in form.username.errors %}
+                <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="{{ form.password.id_for_label }}" class="col-sm-3 col-form-label">パスワード</label>
+            <div class="col-sm-9">
+                {{ form.password|add_class:'form-control' }}
+                {% for error in form.password.errors %}
+                <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        <br><br>
+        <input type="submit" value="Login">
+        </form><br>
+        <p>アカウントをお持ちでない方は<a href= "{% url 'blog:signup' %}" class="account" >こちら</a></p>
+      </div>
+    </main>
+    <aside class="col-md-4">
+      
+    </aside>
+  </div>
+</div>
+{% endblock %}
