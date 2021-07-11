@@ -10,7 +10,7 @@
       <h1 class="mb-4">コメント返信フォーム</h1>
       <div class="comment">
         <p>To: {{ comment.author }}さん</p>
-        <p class="text-black-50">{{ comment.text|linebreaksbr }}</p>
+        <p class="text-white-100">{{ comment.text|linebreaksbr }}</p>
         <form method="POST">{% csrf_token %}
           {{ form.as_p }}
           <button type="submit" class="btn btn-primary">送信</button>
